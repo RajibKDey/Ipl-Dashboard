@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {ThemeProvider} from '@material-ui/styles';
+import Theme from './themes'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import themes from './themes';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={themes.light}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
