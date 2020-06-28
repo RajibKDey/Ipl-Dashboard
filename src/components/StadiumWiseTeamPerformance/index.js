@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Typography, makeStyles } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import ReactApexChart from 'react-apexcharts'
 import _ from 'lodash'
 
-const useStyles = makeStyles( them => ({
-
-}))
 
 export default function StadiumWiseTeamPerformance(props){
-    const classes = useStyles()
 
     const [stadiumMatches, setStadiumMatches] = useState([])
     useEffect(() => {

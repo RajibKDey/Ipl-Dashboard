@@ -4,7 +4,6 @@ import Chart from 'react-apexcharts'
 
 import StadiumWiseTeamPerformance from '../StadiumWiseTeamPerformance'
 import CustomPopup from '../CustomPopup'
-import _ from 'lodash'
 
 const useStyles = makeStyles( theme => ({
     chart: {
@@ -79,12 +78,20 @@ export default function MatchPlayedPerStadium(props){
     return (
         <>
             <Grid container justify='center'>
-                <Chart className={classes.chart} options={options} series={series} type='donut' width='500' />
-                <Typography variant='caption text'>Click Chart Segments To View More</Typography>
+                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                    <Grid container justify='center'>
+                        <Chart className={classes.chart} options={options} series={series} type='donut' width='500' />
+                    </Grid>
+                </Grid>
+                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                    <Grid container justify='center'>
+                        <Typography variant='caption'>Click Chart Segments To View More</Typography>
+                    </Grid>
+                </Grid>
             </Grid>
 
             { stadiumName && stadium?
-                <CustomPopup titleText={stadiumName} maxWidth={'sm'} open={openPopup} fullWidth={true} handleClose={() => setOpenPopup(false)}>
+                <CustomPopup titleText={stadiumName} maxWidth={'sm'} open={openPopup} fullWidth={true} handleClose={() => {setOpenPopup(false); setStadium(''); setStadiumName('')}}>
                     <StadiumWiseTeamPerformance data={stadium}/>
                 </CustomPopup>
                 :null

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Typography, makeStyles } from '@material-ui/core'
+import { Grid, makeStyles } from '@material-ui/core'
 import Chart from 'react-apexcharts'
 import _ from 'lodash'
 
@@ -42,26 +42,13 @@ export default function TeamWin(props){
             title: {
                 text: 'Team-Wise Win Chart'
               },
-            plotOptions: {
-                pie: {
-                    donut: {
-                        labels: {
-                            show: true
-                        }
-                    }
-                }
-            },
         }
     }
-
-    console.log('props', seasonMatches)
-    console.log('props',series, teamList)
-
 
     return (
         <>
             <Grid container justify='center'>
-                <Chart className={classes.chart} options={options} series={series} type='donut' width='380' />
+                <Chart className={classes.chart} options={options} series={series} type='pie' width='380' />
             </Grid>
         </>
     )
