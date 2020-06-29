@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Grid, Typography, Paper, makeStyles, Divider } from '@material-ui/core'
 import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab';
 
-
 // import Background from '../../static/background1.jpg';
 
 import MatchPlayedPerStadium from '../../components/MatchPlayedPerStadium'
@@ -10,10 +9,7 @@ import TossWinMatchWin from '../../components/TossWinMatchWin'
 import TeamWin from '../../components/TeamWin'
 import BestTeamPerformance from '../../components/BestTeamPerformance'
 
-
 import { DataCalculater } from '../../helperFunctions'
-// import classnames from 'classnames'
-import _ from 'lodash'
 
 
 const useStyles = makeStyles(theme => ({
@@ -132,7 +128,7 @@ export default function Dashboard(){
                   <Grid container justify='center'>
                     {
                       season < 10?
-                      <Typography variant='h6'>{(_.invert(yearToSeason))[season]}</Typography>
+                      <Typography variant='h6'>{season}</Typography>
                       :<Typography variant='h6'>1-9</Typography>
                     }
                   </Grid>

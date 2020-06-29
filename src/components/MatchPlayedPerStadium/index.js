@@ -105,7 +105,7 @@ export default function MatchPlayedPerStadium(props){
             <Grid container justify='center'>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                     <Grid container justify='center'>
-                        <Chart className={classes.chart} options={options} series={series} type='donut' width='600' height='330'/>
+                        <Chart className={classes.chart} options={options} series={series} type='donut' width='600' height='300'/>
                     </Grid>
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
