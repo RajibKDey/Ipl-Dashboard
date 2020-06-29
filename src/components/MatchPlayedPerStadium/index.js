@@ -12,7 +12,9 @@ const useStyles = makeStyles( theme => ({
                 '& foreignObject': {
                     '& div': {
                         width: '170px',
-                        height: '200px',
+                        [theme.breakpoints.down('xs')]: {
+                            display: 'none',
+                        },
                     },
                 },
             },
@@ -61,17 +63,40 @@ export default function MatchPlayedPerStadium(props){
             },
             chart:{
                 events:{
-                    click: function(event, chartContext, config) {
-                        if(event.explicitOriginalTarget.parentElement.attributes[4] !== undefined){
-                            setStadium(stadiumWiseMatches[stadiumNames[event.explicitOriginalTarget.parentElement.attributes[4].value]])
-                            setStadiumName(stadiumNames[event.explicitOriginalTarget.parentElement.attributes[4].value])
+                    dataPointSelection: function(event, chartContext, config) {
+                        
+                        if(config.dataPointIndex !== undefined){
+                            setStadium(stadiumWiseMatches[stadiumNames[config.dataPointIndex]])
+                            setStadiumName(stadiumNames[config.dataPointIndex])
                             setOpenPopup(true)
                         }
-                        // console.log(event.explicitOriginalTarget.parentElement.attributes[4].value)
+                        // console.log(config.dataPointIndex)
                         // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
                     }
                 }
-            }
+            },
+            responsive: [{
+              breakpoint: 1280,
+              options: {
+                chart: {
+                  width: 480,
+                }
+              },
+            },{
+              breakpoint: 960,
+              options: {
+                chart: {
+                  width: 550,
+                }
+              },
+            },{
+              breakpoint: 600,
+              options: {
+                chart: {
+                  width: 350,
+                }
+              },
+            }]
         }
     }
 
@@ -80,7 +105,7 @@ export default function MatchPlayedPerStadium(props){
             <Grid container justify='center'>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                     <Grid container justify='center'>
-                        <Chart className={classes.chart} options={options} series={series} type='donut' width='500' />
+                        <Chart className={classes.chart} options={options} series={series} type='donut' width='600' height='330'/>
                     </Grid>
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>

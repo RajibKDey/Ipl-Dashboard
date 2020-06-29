@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { Grid, Typography, Paper, makeStyles, Divider } from '@material-ui/core'
 import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab';
 
-import matchData from '../../static/Match.json'
-import ballData from '../../static/Ball_by_Ball.json'
+
 // import Background from '../../static/background1.jpg';
 
 import MatchPlayedPerStadium from '../../components/MatchPlayedPerStadium'
@@ -11,6 +10,8 @@ import TossWinMatchWin from '../../components/TossWinMatchWin'
 import TeamWin from '../../components/TeamWin'
 import BestTeamPerformance from '../../components/BestTeamPerformance'
 
+
+import { DataCalculater } from '../../helperFunctions'
 // import classnames from 'classnames'
 import _ from 'lodash'
 
@@ -55,80 +56,32 @@ const useStyles = makeStyles(theme => ({
   })
   )
 
-const groupBy = key => array =>
-  array.reduce((objectsByKeyValue, obj) => {
-    const value = obj[key];
-    objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
-    return objectsByKeyValue;
-}, {});
+
+const yearData = {}
 
 
 export default function Dashboard(){
     const classes = useStyles()
     const [season, setSeason] = useState(1)
     const yearToSeason = {'2008': 1, '2009': 2, '2010': 3, '2011': 4, '2012': 5, '2013': 6, '2014': 7, '2015': 8, '2016': 9, 'All': 10}
-    const seasonKey = Object.keys(yearToSeason)
-    let matchCount = []
-    if(season === 10){
-        matchCount = matchData
-    } else {
-        for (let i = 0; i < matchData.length; i++) {
-            if(matchData[i].Season_Id === season){
-                matchCount.push(matchData[i])
-            }
-            if(matchCount > 0 && matchData[i].Season_Id !== season){
-                break
-            }
-        } 
-    }
-
-    let matchId = []
-    matchCount.forEach(row => {
-      matchId.push(row.Match_Id)
-    })
+    const seasonKey = Object.entries(yearToSeason)
     
-    const groupByMatch = groupBy('Match_Id')
-    let allMatches = groupByMatch(ballData)
+    let matchCount, teamwiseBatting, matchId 
 
-    if(season < 10){
-        let seasonMatches = {}
-        matchId.forEach(match => {
-            let matchData = _.get(allMatches, match, '')
-            if(matchData){
-                seasonMatches[match] = matchData
-            }
-        })
-        allMatches = seasonMatches
+    if(typeof yearData[season] !== 'undefined'){
+      matchCount = yearData[season][0]
+      teamwiseBatting  = yearData[season][1]
+      matchId = yearData[season][2]
+    } else {
+      const matchDataByYear = DataCalculater(season)
+      yearData[season] = matchDataByYear
+      matchCount = matchDataByYear[0]
+      teamwiseBatting = matchDataByYear[1]
+      matchId = matchDataByYear[2]
     }
-
-    let teamwiseBatting = {}
-
-    matchId.forEach( match => {
-      allMatches[match].forEach(row => {
-        let runScored = parseInt(_.get(row, 'Batsman_Scored', 0))
-        if(isNaN(runScored)){
-          runScored = 0
-        }
-        let extraRun = _.get(row, 'Extra_Runs', 0)
-        let teamRun = _.get(teamwiseBatting, row.Team_Batting_Id, '-')
-        if(teamRun !== '-'){
-          let matchRun = _.get(teamRun, match, '-')
-          if(matchRun !== '-'){
-            teamwiseBatting[row.Team_Batting_Id][match] = {runs: matchRun.runs + runScored + extraRun, extras: matchRun.extras + extraRun}
-          } else {
-            teamwiseBatting[row.Team_Batting_Id][match] = {runs: runScored, extras: extraRun}
-          }
-        } else {
-          teamwiseBatting[row.Team_Batting_Id] = {[match]: {runs: runScored, extras: extraRun}}
-        }
-      })
-    })
 
     return (
       <>
-        {/* <div className={classes.background}>
-          <img src={Background} alt="" />
-        </div> */}
         <Paper elevation={0} className={classes.backgroundImage}>
           <Grid container alignItems='center'>
   
@@ -158,8 +111,8 @@ export default function Dashboard(){
                         {
                           seasonKey.map((row, index) => 
                             (
-                              <ToggleButton key={index} value={index+1}>
-                                  <Typography variant='body2'>{row}</Typography>
+                              <ToggleButton key={row[0]} value={row[1]}>
+                                  <Typography variant='body2'>{row[0]}</Typography>
                               </ToggleButton>
                             )
                           )
@@ -189,7 +142,7 @@ export default function Dashboard(){
   
           </Grid>
           <Divider/>
-          <Grid container  justify='center' alignItems='center'>
+          <Grid container  justify='center'>
             <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classes.padding}>
               <MatchPlayedPerStadium data={matchCount} />
             </Grid>
@@ -203,10 +156,10 @@ export default function Dashboard(){
               <BestTeamPerformance teamMatchRuns={teamwiseBatting} matchId={matchId} />
             </Grid>
             <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classes.padding}>
-                    {/* 2<BestTeamPerformance ballByBall={allMatches} matchId={matchId} /> */}
+                    2
             </Grid>
             <Grid item xl={4} lg={6} md={6} sm={12} xs={12}  className={classes.padding}>
-                    {/* 3<BestTeamPerformance ballByBall={allMatches} matchId={matchId} /> */}
+                    3
             </Grid>
           </Grid>
         </Paper>

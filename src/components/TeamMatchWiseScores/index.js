@@ -41,7 +41,22 @@ export default function TeamMatchWiseScores(props){
             title: {
                 text: 'Runs'
             },
-        }
+        },
+        responsive: [{
+          breakpoint: 960,
+          options: {
+            chart: {
+              width: 500,
+            }
+          },
+        },{
+          breakpoint: 600,
+          options: {
+            chart: {
+              width: 300,
+            }
+          },
+        }]
       }
 
     return (

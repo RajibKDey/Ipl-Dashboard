@@ -102,14 +102,29 @@ export default function StadiumWiseTeamPerformance(props){
           position: 'top',
           horizontalAlign: 'left',
           offsetX: 40
-        }
+        },
+        responsive: [{
+          breakpoint: 960,
+          options: {
+            chart: {
+              width: 500,
+            }
+          },
+        },{
+          breakpoint: 600,
+          options: {
+            chart: {
+              width: 300,
+            }
+          },
+        }]
       }
     
     
     return (
         <>
           <Grid container justify='center'>
-              <ReactApexChart options={options} series={series} type="bar" height={350} />
+              <ReactApexChart options={options} series={series} type="bar" height={350} width={600}/>
           </Grid>
         </>
     )

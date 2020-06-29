@@ -64,6 +64,31 @@ export default function BestTeamPerformance(props){
                         text: 'Runs'
                       },
                     },
+                    responsive: [{
+                      breakpoint: 1280,
+                      options: {
+                        chart: {
+                          width: 420,
+                          heigth: 480,
+                        }
+                      },
+                    },{
+                      breakpoint: 960,
+                      options: {
+                        chart: {
+                          width: 550,
+                          heigth: 550,
+                        }
+                      },
+                    },{
+                      breakpoint: 600,
+                      options: {
+                        chart: {
+                          width: 350,
+                          heigth: 350,
+                        }
+                      },
+                    }]
                   }
 
     return (
@@ -71,7 +96,7 @@ export default function BestTeamPerformance(props){
           <Grid container justify='center'>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                   <Grid container justify='center'>
-                    <ReactApexChart options={options} series={[{data: averageTeamScores}]} type="bar" height={350} />
+                    <ReactApexChart options={options} series={[{data: averageTeamScores}]} type="bar" height={350} width={600}/>
                   </Grid>
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>

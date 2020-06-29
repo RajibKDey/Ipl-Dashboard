@@ -42,13 +42,35 @@ export default function TeamWin(props){
             title: {
                 text: 'Team-Wise Win Chart'
               },
+              responsive: [{
+                breakpoint: 1280,
+                options: {
+                  chart: {
+                    width: 480,
+                  }
+                },
+              },{
+                breakpoint: 960,
+                options: {
+                  chart: {
+                    width: 550,
+                  }
+                },
+              },{
+                breakpoint: 600,
+                options: {
+                  chart: {
+                    width: 350,
+                  }
+                },
+              }]
         }
     }
 
     return (
         <>
             <Grid container justify='center'>
-                <Chart className={classes.chart} options={options} series={series} type='pie' width='380' />
+                <Chart className={classes.chart} options={options} series={series} type='pie' width='600' height='350'/>
             </Grid>
         </>
     )
