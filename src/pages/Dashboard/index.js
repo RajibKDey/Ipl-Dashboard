@@ -9,6 +9,7 @@ import TossWinMatchWin from '../../components/TossWinMatchWin'
 import TeamWin from '../../components/TeamWin'
 import BestTeamPerformance from '../../components/BestTeamPerformance'
 import TopTenBatsman from '../../components/TopTenBatsman'
+import TopTenBowler from '../../components/TopTenBowler'
 
 import { DataCalculater } from '../../helperFunctions'
 
@@ -63,13 +64,14 @@ export default function Dashboard(){
     const yearToSeason = {'2008': 1, '2009': 2, '2010': 3, '2011': 4, '2012': 5, '2013': 6, '2014': 7, '2015': 8, '2016': 9, 'All': 10}
     const seasonKey = Object.entries(yearToSeason)
     
-    let matchCount, teamwiseBatting, matchId, batsmanScoreByMatch 
+    let matchCount, teamwiseBatting, matchId, batsmanScoreByMatch, bowlerWicketsAndDeliveriesByMatch
 
     if(typeof yearData[season] !== 'undefined'){
       matchCount = yearData[season][0]
       teamwiseBatting  = yearData[season][1]
       matchId = yearData[season][2]
       batsmanScoreByMatch = yearData[season][3]
+      bowlerWicketsAndDeliveriesByMatch = yearData[season][4]
     } else {
       const matchDataByYear = DataCalculater(season)
       yearData[season] = matchDataByYear
@@ -77,7 +79,9 @@ export default function Dashboard(){
       teamwiseBatting = matchDataByYear[1]
       matchId = matchDataByYear[2]
       batsmanScoreByMatch = matchDataByYear[3]
+      bowlerWicketsAndDeliveriesByMatch = yearData[season][4]
     }
+
 
     return (
       <>
@@ -158,7 +162,7 @@ export default function Dashboard(){
               <TopTenBatsman batsmanData={batsmanScoreByMatch} matchId={matchId}/>
             </Grid>
             <Grid item xl={4} lg={6} md={6} sm={12} xs={12}  className={classes.padding}>
-                    3
+              <TopTenBowler bowlerData={bowlerWicketsAndDeliveriesByMatch} matchId={matchId} />
             </Grid>
           </Grid>
         </Paper>

@@ -5,13 +5,11 @@ import ReactApexChart from 'react-apexcharts'
 
 export default function TeamMatchWiseScores(props){
 
-    // console.log(props.data)
     let matches = Object.keys(props.data)
     let teamScorePerMatch = []
     matches.forEach(match => {
         teamScorePerMatch.push(props.data[match]['runs'] + props.data[match]['extras'])
     })
-    console.log(teamScorePerMatch)
 
     let options = {
         chart: {

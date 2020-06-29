@@ -3,33 +3,28 @@ import { Grid } from '@material-ui/core'
 import ReactApexChart from 'react-apexcharts'
 import _ from 'lodash'
 
-export default function BatsmanPerformance(props){
+export default function BowlerPerformance(props){
     let matchId = Object.keys(props.data)
 
-    let runs = []
-    let strikeRate = []
-    let fours = []
-    let sixes = []
+    let economies = []
+    let overs = []
+    let wickets = []
     matchId.forEach( match => {
         let matchData = _.get(props.data, match, '-')
-        runs.push(matchData.runs)
-        strikeRate.push(((matchData.runs/matchData.balls)*100).toFixed(2))
-        fours.push(matchData.fours)
-        sixes.push(matchData.sixes)
+        economies.push(matchData.runs/matchData.balls)
+        overs.push(matchData.balls/6)
+        wickets.push(matchData.wickets)
     })
-
+    
     let series = [{
-        name: 'Strike Rate',
-        data: strikeRate
+        name: 'Economy',
+        data: economies
       }, {
-        name: 'Runs',
-        data: runs
+        name: 'Overs',
+        data: overs
       }, {
-        name: 'Fours',
-        data: fours
-      }, {
-        name: 'Sixes',
-        data: sixes
+        name: 'Wickets',
+        data: wickets
       }]
 
     let options = {
