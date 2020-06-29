@@ -8,6 +8,7 @@ import MatchPlayedPerStadium from '../../components/MatchPlayedPerStadium'
 import TossWinMatchWin from '../../components/TossWinMatchWin'
 import TeamWin from '../../components/TeamWin'
 import BestTeamPerformance from '../../components/BestTeamPerformance'
+import TopTenBatsman from '../../components/TopTenBatsman'
 
 import { DataCalculater } from '../../helperFunctions'
 
@@ -62,18 +63,20 @@ export default function Dashboard(){
     const yearToSeason = {'2008': 1, '2009': 2, '2010': 3, '2011': 4, '2012': 5, '2013': 6, '2014': 7, '2015': 8, '2016': 9, 'All': 10}
     const seasonKey = Object.entries(yearToSeason)
     
-    let matchCount, teamwiseBatting, matchId 
+    let matchCount, teamwiseBatting, matchId, batsmanScoreByMatch 
 
     if(typeof yearData[season] !== 'undefined'){
       matchCount = yearData[season][0]
       teamwiseBatting  = yearData[season][1]
       matchId = yearData[season][2]
+      batsmanScoreByMatch = yearData[season][3]
     } else {
       const matchDataByYear = DataCalculater(season)
       yearData[season] = matchDataByYear
       matchCount = matchDataByYear[0]
       teamwiseBatting = matchDataByYear[1]
       matchId = matchDataByYear[2]
+      batsmanScoreByMatch = matchDataByYear[3]
     }
 
     return (
@@ -152,7 +155,7 @@ export default function Dashboard(){
               <BestTeamPerformance teamMatchRuns={teamwiseBatting} matchId={matchId} />
             </Grid>
             <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classes.padding}>
-                    2
+              <TopTenBatsman batsmanData={batsmanScoreByMatch} matchId={matchId}/>
             </Grid>
             <Grid item xl={4} lg={6} md={6} sm={12} xs={12}  className={classes.padding}>
                     3

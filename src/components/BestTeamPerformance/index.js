@@ -35,8 +35,7 @@ export default function BestTeamPerformance(props){
                           setOpenPopup(true)
                           setSelectedTeam(config.dataPointIndex)
                           setSelectedTeamScores(_.get(props.teamMatchRuns,teamsList[config.dataPointIndex], ''))
-                          console.log(config.dataPointIndex)
-                          // console.log(event.explicitOriginalTarget.parentElement.attributes[4].value)
+                          // console.log(config.dataPointIndex)
                           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
                         }
                     }
