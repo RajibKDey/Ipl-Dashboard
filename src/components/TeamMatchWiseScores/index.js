@@ -36,9 +36,14 @@ export default function TeamMatchWiseScores(props){
           },
         },
         yaxis: {
-            title: {
-                text: 'Runs'
-            },
+          title: {
+              text: 'Runs'
+          },
+        },
+        xaxis: {
+          title: {
+            text: 'Match Count'
+          },
         },
         responsive: [{
           breakpoint: 960,

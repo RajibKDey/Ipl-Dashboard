@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Typography, Paper, makeStyles, Divider } from '@material-ui/core'
+import { Grid, Typography, Paper, makeStyles, Divider, TextField } from '@material-ui/core'
 import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab';
 
 // import Background from '../../static/background1.jpg';
@@ -12,6 +12,8 @@ import TopTenBatsman from '../../components/TopTenBatsman'
 import TopTenBowler from '../../components/TopTenBowler'
 
 import { DataCalculater } from '../../helperFunctions'
+
+import classnames from 'classnames'
 
 
 const useStyles = makeStyles(theme => ({
@@ -50,7 +52,54 @@ const useStyles = makeStyles(theme => ({
           minHeight: '50%',
           opacity: 0.75,
         }
-    }
+    },
+    mdToXl: {
+      [theme.breakpoints.down('sm')]: {
+        display: 'none',
+      },
+    },
+    smToXs: {
+      [theme.breakpoints.up('md')]: {
+        display: 'none',
+      }
+    },
+    xs: {
+      [theme.breakpoints.down('xs')]: {
+        display: 'none',
+      }
+    },
+    xsplus: {
+      [theme.breakpoints.up('xs')]: {
+        display: 'none',
+      }
+    },
+    xsDown: {
+      [theme.breakpoints.down('xs')]: {
+        '& button': {
+          padding: '2px',
+        },
+      }
+    },
+    text: {
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '16px',
+        fontWeight: '500',
+      }
+    },
+    textColor: {
+      color: 'white',
+    },
+    background: {
+      backgroundColor: '#363636',
+    },
+    paddingBottom: {
+      paddingBottom: theme.spacing(2),
+    },
+    xsJustify: {
+      [theme.breakpoints.down('xs')]: {
+        justifyContent: 'center',
+      }
+    },
   })
   )
 
@@ -86,7 +135,10 @@ export default function Dashboard(){
     return (
       <>
         <Paper elevation={0} className={classes.backgroundImage}>
-          <Grid container alignItems='center'>
+          <Grid container className={classnames(classes.padding, classes.background, classes.xsJustify)}>
+            <Typography className={classnames(classes.textColor, classes.background)} variant={'h6'}>IPL Dashboard</Typography>
+          </Grid>
+          <Grid container alignItems='center' className={classes.mdToXl}>
   
             <Grid item xl={2} lg={2} md={2}>
               <Grid container alignItems='center' className={classes.padding}>
@@ -142,8 +194,52 @@ export default function Dashboard(){
                 </Grid>
               </Grid>
             </Grid>
-  
           </Grid>
+
+          <Grid container alignItems='center' className={classes.smToXs}>
+            <Grid item sm={12} xs={12} className={classes.padding}>
+                <Grid container>
+                  <Grid item sm={6} xs={6}>
+                    <Grid container>
+                      <Typography className={classes.text} variant='h6'>Total Matches: &nbsp;</Typography>
+                      <Typography className={classes.text} variant='h6'>{matchCount.length}</Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid item sm={6} xs={6}>
+                    <Grid container justify='flex-end'>
+                      <Typography className={classes.text} variant='h6'>IPL Season: &nbsp;</Typography>
+                      {
+                      season < 10?
+                        <Typography className={classes.text} variant='h6'>{season}</Typography>
+                        :<Typography className={classes.text} variant='h6'>1-9</Typography>
+                      }
+                    </Grid>
+                  </Grid>
+                </Grid>
+            </Grid>
+            <Grid item sm={12} xs={12} className={classes.paddingBottom}>
+              <Grid container justify='center'>
+                <ToggleButtonGroup
+                className={classes.xsDown}
+                value={season}
+                exclusive
+                onChange={e => setSeason(yearToSeason[e.target.textContent])}
+                aria-label="text alignment"
+                >
+                  {
+                    seasonKey.map((row, index) => 
+                      (
+                        <ToggleButton key={row[0]} value={row[1]}>
+                            <Typography variant='body2'>{row[0]}</Typography>
+                        </ToggleButton>
+                      )
+                    )
+                  }
+                </ToggleButtonGroup>
+              </Grid>
+            </Grid>
+          </Grid>
+
           <Divider/>
           <Grid container  justify='center'>
             <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classes.padding}>

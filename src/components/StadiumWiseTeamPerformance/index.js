@@ -81,11 +81,14 @@ export default function StadiumWiseTeamPerformance(props){
             formatter: function (val) {
               return val
             }
-          }
+          },
+          title: {
+            text: 'Match Count'
+          },
         },
         yaxis: {
           title: {
-            text: undefined
+            text: 'Teams'
           },
         },
         tooltip: {
