@@ -1,14 +1,22 @@
 import React, { useState } from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography, makeStyles } from '@material-ui/core'
 import ReactApexChart from 'react-apexcharts'
 import _ from 'lodash'
 
 import CustomPopup from '../CustomPopup'
 import BowlerPerformance from '../BowlerPerformance'
 
+const useStyles= makeStyles(theme => ({
+  xs: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+  },
+  }
+}))
+
 
 export default function TopTenBowler(props){
-    // console.log(props.bowlerData, props.matchId)
+    const classes = useStyles()
     let bowlerNames = Object.keys(props.bowlerData)
 
     const [openPopup, setOpenPopup] = useState(false)
@@ -72,9 +80,11 @@ export default function TopTenBowler(props){
           },
           events: {
             click: function(event, chartContext, config) {
-                setOpenPopup(true)
+              if(config.dataPointIndex !== -1){
                 setSelectedPlayer(topTenId[config.dataPointIndex])
-                setSelectedPlayerMatchData(_.get(props.bowlerData, topTenId[config.dataPointIndex], '-'))
+                setSelectedPlayerMatchData(_.get(props.batsmanData, topTenId[config.dataPointIndex], '-'))
+                setOpenPopup(true)
+              }
                 // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
             }
           },
@@ -155,7 +165,7 @@ export default function TopTenBowler(props){
                         <ReactApexChart options={options} series={series} type="line" height={350} width={600}/>
                     </Grid>
                 </Grid>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.xs}>
                     <Grid container justify='center'>
                         <Typography variant='caption'>Click Chart Segments To View More</Typography>
                     </Grid>

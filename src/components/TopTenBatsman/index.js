@@ -8,7 +8,6 @@ import BatsmanPerformance from '../BatsmanPerformance'
 
 
 export default function TopTenBatsman(props){
-    // console.log(props.batsmanData, props.matchId)
     let batsmanNames = Object.keys(props.batsmanData)
 
     const [openPopup, setOpenPopup] = useState(false)
@@ -60,9 +59,11 @@ export default function TopTenBatsman(props){
           stacked: true,
           events: {
             click: function(event, chartContext, config) {
-                setOpenPopup(true)
-                setSelectedPlayer(topTenId[config.dataPointIndex])
-                setSelectedPlayerMatchData(_.get(props.batsmanData, topTenId[config.dataPointIndex], '-'))
+                if(config.dataPointIndex !== -1){
+                  setSelectedPlayer(topTenId[config.dataPointIndex])
+                  setSelectedPlayerMatchData(_.get(props.batsmanData, topTenId[config.dataPointIndex], '-'))
+                  setOpenPopup(true)
+                }
                 // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
             }
           },
