@@ -55,7 +55,7 @@ export default function BestTeamPerformance(props){
                     xaxis: {
                       categories: teamsList,
                       title: {
-                        text: 'Teams'
+                        text: 'Team Names'
                       },
                     },
                     yaxis: {

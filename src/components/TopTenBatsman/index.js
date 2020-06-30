@@ -102,7 +102,7 @@ export default function TopTenBatsman(props){
         xaxis: {
             categories: topTenId,
             title: {
-              text: 'Teams'
+              text: 'Players'
             },
         },
         yaxis: {
