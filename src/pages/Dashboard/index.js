@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Typography, Paper, makeStyles, Divider, TextField } from '@material-ui/core'
+import { Grid, Typography, Paper, makeStyles, Divider } from '@material-ui/core'
 import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab';
 
 // import Background from '../../static/background1.jpg';
@@ -34,24 +34,6 @@ const useStyles = makeStyles(theme => ({
     },
     border: {
         border: '1px solid black'
-    },
-    background: {
-        position: 'fixed',
-        top: '-50%',
-        left: '-50%',
-        width: '200%',
-        height: '200%',
-        '& img': {
-          position: 'absolute',
-          top: 0, 
-          left: 0, 
-          right: 0,
-          bottom: 0,
-          margin: 'auto', 
-          minWidth: '50%',
-          minHeight: '50%',
-          opacity: 0.75,
-        }
     },
     mdToXl: {
       [theme.breakpoints.down('sm')]: {
@@ -100,6 +82,14 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
       }
     },
+    paperBackground: {
+      backgroundColor: '#FAFAFA',
+    },
+    elevation: {
+      backgroundColor: 'white',
+      borderRadius: '4px',
+      boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
+    }
   })
   )
 
@@ -134,7 +124,7 @@ export default function Dashboard(){
 
     return (
       <>
-        <Paper elevation={0} className={classes.backgroundImage}>
+        <Paper elevation={0} className={classnames(classes.backgroundImage, classes.paperBackground)}>
           <Grid container className={classnames(classes.padding, classes.background, classes.xsJustify)}>
             <Typography className={classnames(classes.textColor, classes.background)} variant={'h6'}>IPL Dashboard</Typography>
           </Grid>
@@ -241,23 +231,23 @@ export default function Dashboard(){
           </Grid>
 
           <Divider/>
-          <Grid container  justify='center'>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classes.padding}>
+          <Grid container justify='center'>
+            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
               <MatchPlayedPerStadium data={matchCount} />
             </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classes.padding}>
+            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
               <TossWinMatchWin data={matchCount} />
             </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classes.padding}>
+            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
               <TeamWin data={matchCount} />
             </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classes.padding}>
+            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
               <BestTeamPerformance teamMatchRuns={teamwiseBatting} matchId={matchId} />
             </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classes.padding}>
+            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
               <TopTenBatsman batsmanData={batsmanScoreByMatch} matchId={matchId}/>
             </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12}  className={classes.padding}>
+            <Grid item xl={4} lg={6} md={6} sm={12} xs={12}  className={classnames(classes.padding, classes.elevation)}>
               <TopTenBowler bowlerData={bowlerWicketsAndDeliveriesByMatch} matchId={matchId} />
             </Grid>
           </Grid>
