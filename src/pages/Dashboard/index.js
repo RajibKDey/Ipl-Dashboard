@@ -92,17 +92,31 @@ const useStyles = makeStyles(theme => ({
       marginBottom: '20px',
       boxShadow: '0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1)',
       flexBasis: '49%',
-      // boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
+      [theme.breakpoints.down('sm')]: {
+        flexBasis: '100%',
+      }
+    },
+    fullCard: {
+      backgroundColor: 'white',
+      borderRadius: '5px',
+      marginBottom: '20px',
+      boxShadow: '0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1)',
     },
     item: {
       marginBottom: '20px',
       flexBasis: '49%',
+      [theme.breakpoints.down('sm')]: {
+        flexBasis: '100%',
+      }
     },
     root: {
       display: 'flex',
       justifyContent: 'center',
       padding: '1rem',
-      backgroundColor: '#FAFAFA'
+      backgroundColor: '#FAFAFA',
+      [theme.breakpoints.down('sm')]: {
+        padding: '1rem 8px',
+      }
     }
   })
   )
@@ -247,7 +261,7 @@ export default function Dashboard(){
           <Divider/>
           <Paper elevation={0} className={classes.root}>
             <Grid container justify='space-between'>
-              <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
+              <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classnames(classes.padding, classes.fullCard)}>
                 <MatchPlayedPerStadium data={matchCount} />
               </Grid>
               <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.item)}>

@@ -1,9 +1,10 @@
 * {
   box-sizing: border-box;
+  font-family: 'Montserrat', 'sans-serif' !important;
 }
 body {
   margin: 0;
-  font-family: 'Roboto';
+  font-family: 'Montserrat' !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

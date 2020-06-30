@@ -86,37 +86,37 @@ export default function TossWinMatchWin(props){
           horizontalAlign: 'left',
           offsetX: 40
         },
-        responsive: [{
-          breakpoint: 1280,
-          options: {
-            chart: {
-              width: 420,
-              heigth: 350,
-            }
-          },
-        },{
-          breakpoint: 960,
-          options: {
-            chart: {
-              width: 550,
-              heigth: 550,
-            }
-          },
-        },{
-          breakpoint: 600,
-          options: {
-            chart: {
-              width: 350,
-              heigth:350,
-            }
-          },
-        }]
+        // responsive: [{
+        //   breakpoint: 1280,
+        //   options: {
+        //     chart: {
+        //       width: 420,
+        //       heigth: 350,
+        //     }
+        //   },
+        // },{
+        //   breakpoint: 960,
+        //   options: {
+        //     chart: {
+        //       width: 550,
+        //       heigth: 550,
+        //     }
+        //   },
+        // },{
+        //   breakpoint: 600,
+        //   options: {
+        //     chart: {
+        //       width: 350,
+        //       heigth:350,
+        //     }
+        //   },
+        // }]
       }
 
     return (
         <>
           <Grid container justify='center'>
-            <ReactApexChart options={options} series={series} type="bar" height={350} width={600} />
+            <ReactApexChart options={options} series={series} type="bar"  />
           </Grid>
         </>
     )

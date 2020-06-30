@@ -73,9 +73,7 @@ const lightTheme = createMuiTheme({
   // },
   typography: {
     fontFamily: [
-      'Roboto',
-      "Raleway",
-      'Poppins',
+      "Montserrat",
       "sans-serif",
     ].join(','),
   },

@@ -4,6 +4,7 @@ import Chart from 'react-apexcharts'
 
 import StadiumWiseTeamPerformance from '../StadiumWiseTeamPerformance'
 import CustomPopup from '../CustomPopup'
+import TeamWinLossData from '../TeamWinLossData'
 
 const useStyles = makeStyles( theme => ({
     chart: {
@@ -11,10 +12,11 @@ const useStyles = makeStyles( theme => ({
             '& svg': {
                 '& foreignObject': {
                     '& div': {
-                        width: '170px',
-                        [theme.breakpoints.down('xs')]: {
-                            display: 'none',
-                        },
+                        // width: '170px',
+                        display: 'none',
+                        // [theme.breakpoints.down('xs')]: {
+                        //     display: 'none',
+                        // },
                     },
                 },
             },
@@ -103,18 +105,28 @@ export default function MatchPlayedPerStadium(props){
 
     return (
         <>
-            <Grid container justify='center'>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                    <Grid container justify='center'>
-                        <Chart className={classes.chart} options={options} series={series} type='donut' width='600' height='300'/>
+        <Grid container justify='center' alignItems='center'>
+            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+                <Grid container justify='center'>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                        <Grid container justify='center'>
+                            <Chart className={classes.chart} options={options} series={series} type='donut' width='600' height='300'/>
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                    <Grid container justify='center'>
-                        <Typography variant='caption'>Click Chart Segments To View More</Typography>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                        <Grid container justify='center'>
+                            <Typography variant='caption'>Click Chart Segments To View More</Typography>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
+            <Grid item xl={5} lg={5} md={6} sm={12} xs={12}>
+                <Grid container justify='center'>
+                    <TeamWinLossData />
+                </Grid>
+            </Grid>
+        </Grid>
+            
 
             { stadiumName && stadium?
                 <CustomPopup titleText={stadiumName} maxWidth={'sm'} open={openPopup} fullWidth={true} handleClose={() => {setOpenPopup(false); setStadium(''); setStadiumName('')}}>

@@ -75,7 +75,7 @@ export default function BestTeamPerformance(props){
                       breakpoint: 960,
                       options: {
                         chart: {
-                          width: 550,
+                          width: 400,
                           heigth: 550,
                         }
                       },
