@@ -55,8 +55,9 @@ export default function MatchPlayedPerStadium(props){
             plotOptions: {
                 pie: {
                     donut: {
+                        size: '45%',
                         labels: {
-                            show: true
+                            // show: true
                         }
                     }
                 }

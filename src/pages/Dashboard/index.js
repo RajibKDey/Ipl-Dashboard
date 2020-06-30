@@ -14,6 +14,7 @@ import TopTenBowler from '../../components/TopTenBowler'
 import { DataCalculater } from '../../helperFunctions'
 
 import classnames from 'classnames'
+import StatisticalDataOnStadium from '../../components/StatisticalDataOnStadium';
 
 
 const useStyles = makeStyles(theme => ({
@@ -87,8 +88,21 @@ const useStyles = makeStyles(theme => ({
     },
     elevation: {
       backgroundColor: 'white',
-      borderRadius: '4px',
-      boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
+      borderRadius: '5px',
+      marginBottom: '20px',
+      boxShadow: '0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1)',
+      flexBasis: '49%',
+      // boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
+    },
+    item: {
+      marginBottom: '20px',
+      flexBasis: '49%',
+    },
+    root: {
+      display: 'flex',
+      justifyContent: 'center',
+      padding: '1rem',
+      backgroundColor: '#FAFAFA'
     }
   })
   )
@@ -231,26 +245,31 @@ export default function Dashboard(){
           </Grid>
 
           <Divider/>
-          <Grid container justify='center'>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
-              <MatchPlayedPerStadium data={matchCount} />
+          <Paper elevation={0} className={classes.root}>
+            <Grid container justify='space-between'>
+              <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
+                <MatchPlayedPerStadium data={matchCount} />
+              </Grid>
+              <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.item)}>
+                <StatisticalDataOnStadium data={matchCount} />
+              </Grid>
+              <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
+                <TossWinMatchWin data={matchCount} />
+              </Grid>
+              <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
+                <TeamWin data={matchCount} />
+              </Grid>
+              <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
+                <BestTeamPerformance teamMatchRuns={teamwiseBatting} matchId={matchId} />
+              </Grid>
+              <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
+                <TopTenBatsman batsmanData={batsmanScoreByMatch} matchId={matchId}/>
+              </Grid>
+              <Grid item xl={4} lg={6} md={6} sm={12} xs={12}  className={classnames(classes.padding, classes.elevation)}>
+                <TopTenBowler bowlerData={bowlerWicketsAndDeliveriesByMatch} matchId={matchId} />
+              </Grid>
             </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
-              <TossWinMatchWin data={matchCount} />
-            </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
-              <TeamWin data={matchCount} />
-            </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
-              <BestTeamPerformance teamMatchRuns={teamwiseBatting} matchId={matchId} />
-            </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
-              <TopTenBatsman batsmanData={batsmanScoreByMatch} matchId={matchId}/>
-            </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12}  className={classnames(classes.padding, classes.elevation)}>
-              <TopTenBowler bowlerData={bowlerWicketsAndDeliveriesByMatch} matchId={matchId} />
-            </Grid>
-          </Grid>
+          </Paper>
         </Paper>
       </>
     )
