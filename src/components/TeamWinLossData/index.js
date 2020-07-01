@@ -11,13 +11,36 @@ import _ from 'lodash'
 
 const useStyles = makeStyles({
   table: {
+    '& thead th': {
+      borderBottom: '1px solid rgba(0,0,0,0.12)',
+      color: 'rgba(0,0,0,0.9)',
+      fontWeight: 600,
+      fontSize: '1rem',
+      '&:not(:last-of-type)': {
+        borderRight: '1px solid rgba(0,0,0,0.12)',
+      }
+    },
     '& th': {
-        padding: '4px',
+        padding: '8px',
     },
     '& td': {
         lineHeight: .8,
-        padding: '8px',
+        padding: '12px',
     },
+    '& tbody tr:last-of-type': {
+      borderBottom: 0,
+    },
+    '& tr td:last-of-type' : {
+      borderRight: 0,
+    },
+  },
+  container: {
+    border: '0.1px solid rgba(0,0,0,0.12)',
+    boxShadow: '0 1px 1px 0 rgba(66, 66, 66, 0.08), 0 1px 3px 0px rgba(66, 66, 66, 0.16)',
+    borderBottom: 0
+  },
+  cells: {
+    border: '1px solid rgba(0,0,0,0.12)',
   },
 });
 
@@ -68,23 +91,23 @@ export default function TeamWinLossData(props) {
   })
 
   return (
-        <TableContainer component={Paper}>
+        <TableContainer className={classes.container} component={Paper}>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                 <TableRow>
-                    <TableCell>Team ID</TableCell>
-                    <TableCell align="right">Wins</TableCell>
-                    <TableCell align="right">Loses</TableCell>
-                    <TableCell align="right">Win (%)</TableCell>
+                    <TableCell align='center'>Team ID</TableCell>
+                    <TableCell align="center">Wins</TableCell>
+                    <TableCell align="center">Loses</TableCell>
+                    <TableCell align="center">Win (%)</TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
                 {teamPerformance.map((row) => (
-                    <TableRow key={row[0]}>
-                      <TableCell scope="row">{row[0]}</TableCell>
-                      <TableCell align="right">{row[1]}</TableCell>
-                      <TableCell align="right">{row[2]}</TableCell>
-                      <TableCell align="right">{row[3]}</TableCell>
+                    <TableRow hover key={row[0]}>
+                      <TableCell className={classes.cells} align='center'>{row[0]}</TableCell>
+                      <TableCell className={classes.cells} align="center">{row[1]}</TableCell>
+                      <TableCell className={classes.cells} align="center">{row[2]}</TableCell>
+                      <TableCell className={classes.cells} align="center">{row[3]}</TableCell>
                     </TableRow>
                 ))}
                 </TableBody>

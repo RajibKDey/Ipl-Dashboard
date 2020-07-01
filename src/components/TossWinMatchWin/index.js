@@ -96,7 +96,7 @@ export default function TossWinMatchWin(props){
           options: {
             chart: {
               width: 420,
-              heigth: 400,
+              height: 400,
             }
           },
         },{
@@ -104,7 +104,7 @@ export default function TossWinMatchWin(props){
           options: {
             chart: {
               width: 550,
-              heigth: 550,
+              height: 400,
             }
           },
         },{
@@ -112,7 +112,7 @@ export default function TossWinMatchWin(props){
           options: {
             chart: {
               width: 350,
-              heigth: 350,
+              height: 400,
             }
           },
         }]
@@ -121,7 +121,7 @@ export default function TossWinMatchWin(props){
     return (
         <>
           <Grid container justify='center'>
-            <ReactApexChart options={options} series={series} type="bar" width='600' heigth= '350'/>
+            <ReactApexChart options={options} series={series} type="bar" width='500' heigth= '400'/>
           </Grid>
         </>
     )

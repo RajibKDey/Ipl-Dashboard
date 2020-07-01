@@ -121,14 +121,11 @@ const useStyles = makeStyles(theme => ({
         padding: '1rem 8px',
       }
     },
-    xsSelect: {
+    formControl: {
+      display: 'none',
       [theme.breakpoints.down('xs')]: {
         display: 'block',
       }
-    },
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
     },
     removePadding: {
       [theme.breakpoints.down('xs')]: {
@@ -139,7 +136,24 @@ const useStyles = makeStyles(theme => ({
       [theme.breakpoints.down('xs')]: {
         display: 'none',
       }
-    }
+    },
+    select: {
+      padding: '1px 0 0',
+      minWidth: '150px',
+      '& div': {
+        paddingLeft: '5px',
+      }
+    },
+    buttonGroup: {
+      '& button[aria-pressed="true"] p': {
+        color: 'black',
+        fontWeight: 600,
+      },
+      '& button p': {
+        fontWeight: 500,
+        color: 'rgba(0,0,0,0.6)',
+      }
+    },
   })
   )
 
@@ -198,6 +212,7 @@ export default function Dashboard(){
             <Grid item className={classes.flex}>
                 <Grid container justify='center'>
                     <ToggleButtonGroup
+                    className={classes.buttonGroup}
                     value={season}
                     exclusive
                     onChange={e => setSeason(yearToSeason[e.target.textContent])}
@@ -260,7 +275,7 @@ export default function Dashboard(){
             <Grid item sm={12} xs={12} className={classnames(classes.paddingBottom, classes.removePadding)}>
               <Grid container justify='center'>
                 <ToggleButtonGroup
-                className={classes.xsDown}
+                className={classnames(classes.xsDown, classes.buttonGroup)}
                 value={season}
                 exclusive
                 onChange={e => setSeason(yearToSeason[e.target.textContent])}
@@ -279,8 +294,8 @@ export default function Dashboard(){
                 <FormControl className={classes.formControl}>
                   <InputLabel id="season">Season</InputLabel>
                   <Select
+                    className={classes.select}
                     labelId='season'
-                    className={classes.xsSelect}
                     value={season}
                     onChange={e => {
                       setSeason(e.target.value)

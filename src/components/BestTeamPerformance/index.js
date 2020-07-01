@@ -91,7 +91,7 @@ export default function BestTeamPerformance(props){
           <Grid container justify='center'>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                   <Grid container justify='center'>
-                    <ReactApexChart options={options} series={[{data: averageTeamScores}]} type="bar" height={350} width={600}/>
+                    <ReactApexChart options={options} series={[{data: averageTeamScores}]} type="bar" height={350} width={500}/>
                   </Grid>
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>

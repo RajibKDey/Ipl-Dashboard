@@ -165,7 +165,7 @@ export default function TopTenBowler(props){
             <Grid container justify='center'>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                     <Grid container justify='center'>
-                        <ReactApexChart options={options} series={series} type="line" height={350} width={600}/>
+                        <ReactApexChart options={options} series={series} type="line" height={350} width={550}/>
                     </Grid>
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.xs}>
