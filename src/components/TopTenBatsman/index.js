@@ -64,7 +64,6 @@ export default function TopTenBatsman(props){
                   setSelectedPlayerMatchData(_.get(props.batsmanData, topTenId[config.dataPointIndex], '-'))
                   setOpenPopup(true)
                 }
-                // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
             }
           },
           toolbar: {
@@ -96,8 +95,14 @@ export default function TopTenBatsman(props){
           }
         },
         legend: {
+          offsetY: -5,
           position: 'top',
-          horizontalAlign: 'left'
+          horizontalAlign: 'left',
+          markers: {
+            height: '6px',
+            width: '6px',
+          },
+          fontSize: '12px',
         },
         xaxis: {
             categories: topTenId,

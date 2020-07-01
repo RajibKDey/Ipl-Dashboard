@@ -11,7 +11,6 @@ export default function BestTeamPerformance(props){
     const [selectedTeam, setSelectedTeam] = useState('')
     const [selectedTeamScores, setSelectedTeamScores] = useState('')
     const [openPopup, setOpenPopup] = useState(false)
-    // console.log(props.teamMatchRuns, props.matchId)
     let teamsList = Object.keys(props.teamMatchRuns)
     let averageTeamScores = []
     teamsList.forEach(team => {
@@ -35,14 +34,11 @@ export default function BestTeamPerformance(props){
                           setOpenPopup(true)
                           setSelectedTeam(config.dataPointIndex)
                           setSelectedTeamScores(_.get(props.teamMatchRuns,teamsList[config.dataPointIndex], ''))
-                          // console.log(config.dataPointIndex)
-                          // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
                         }
                     }
                     },
                     plotOptions: {
                       bar: {
-                        // horizontal: true,
                         vertical: true
                       }
                     },

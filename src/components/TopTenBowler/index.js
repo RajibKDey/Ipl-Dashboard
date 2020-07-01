@@ -82,7 +82,7 @@ export default function TopTenBowler(props){
             click: function(event, chartContext, config) {
               if(config.dataPointIndex !== -1){
                 setSelectedPlayer(topTenId[config.dataPointIndex])
-                setSelectedPlayerMatchData(_.get(props.batsmanData, topTenId[config.dataPointIndex], '-'))
+                setSelectedPlayerMatchData(_.get(props.bowlerData, topTenId[config.dataPointIndex], '-'))
                 setOpenPopup(true)
               }
                 // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
@@ -123,12 +123,15 @@ export default function TopTenBowler(props){
           min: 0,
           max: 10
         },
+        
         legend: {
+          markers: {
+            height: '6px',
+            width: '6px',
+          },
+          fontSize: '12px',
           position: 'top',
           horizontalAlign: 'right',
-          floating: true,
-          offsetY: -25,
-          offsetX: -5
         },
         responsive: [{
             breakpoint: 1280,

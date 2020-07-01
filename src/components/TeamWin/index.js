@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, makeStyles } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import Chart from 'react-apexcharts'
 import _ from 'lodash'
 
@@ -11,12 +11,8 @@ const groupBy = key => array =>
     return objectsByKeyValue;
   }, {});
 
-const useStyles = makeStyles( theme => ({
-
-}))
 
 export default function TeamWin(props){
-    const classes = useStyles()
 
     const [seasonMatches, setSeasonMatches] = useState([])
     useEffect(() => {
@@ -42,11 +38,22 @@ export default function TeamWin(props){
             title: {
                 text: 'Team-Wise Win Chart'
               },
+              legend: {
+                markers: {
+                  height: '6px',
+                  width: '6px',
+                },
+                position: 'bottom',
+                itemMargin: {
+                  horizontal: 10,
+                  vertical: 5,
+                }
+              },
               responsive: [{
                 breakpoint: 1280,
                 options: {
                   chart: {
-                    width: 480,
+                    width: 400,
                   }
                 },
               },{
@@ -70,7 +77,7 @@ export default function TeamWin(props){
     return (
         <>
             <Grid container justify='center'>
-                <Chart className={classes.chart} options={options} series={series} type='pie' width='600' height='350'/>
+                <Chart options={options} series={series} type='pie' width='600' height='350'/>
             </Grid>
         </>
     )

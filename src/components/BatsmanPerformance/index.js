@@ -39,7 +39,7 @@ export default function BatsmanPerformance(props){
         },
         plotOptions: {
           bar: {
-            horizontal: true,
+            vertical: true,
             columnWidth: '55%',
             endingShape: 'rounded'
           },
@@ -53,9 +53,8 @@ export default function BatsmanPerformance(props){
           colors: ['transparent']
         },
         xaxis: {
-          categories: matchId,
           title: {
-            text: 'Count'
+            text: 'Batting Stats'
           }
         },
         yaxis: {

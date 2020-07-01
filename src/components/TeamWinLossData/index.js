@@ -7,10 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import _ from 'lodash'
 
 const useStyles = makeStyles({
   table: {
-    // minWidth: 650,
     '& th': {
         padding: '4px',
     },
@@ -21,43 +21,70 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 export default function TeamWinLossData(props) {
   const classes = useStyles();
+
+  let matchId = Object.keys(props.data)
+
+  let teamWinLoss = []
+  matchId.forEach( match => {
+    let opponent = _.get(props.data, match, '-').Opponent_Team_Id
+    let team = _.get(props.data, match, '-').Team_Name_Id
+    let winner = _.get(props.data, match, '-').Match_Winner_Id
+    if(opponent === winner){
+      let teamStats = _.get(teamWinLoss, opponent, '-')
+      let teamStats1 = _.get(teamWinLoss, team, '-')
+      if(teamStats !== '-'){
+        teamWinLoss[opponent] = {...teamStats, wins: teamStats.wins + 1}
+      } else {
+        teamWinLoss[opponent] = {wins: 1, loses: 0}
+      }
+      if(teamStats1 !== '-'){
+        teamWinLoss[team] = {...teamStats1, loses: teamStats1.loses + 1}
+      } else {
+        teamWinLoss[team] = {wins: 0, loses: 1}
+      }
+    } else {
+      let teamStats = _.get(teamWinLoss, opponent, '-')
+      let teamStats1 = _.get(teamWinLoss, team, '-')
+      if(teamStats !== '-'){
+        teamWinLoss[opponent] = {...teamStats, loses: teamStats.loses + 1}
+      } else {
+        teamWinLoss[opponent] = {loses: 1, wins: 0}
+      }
+      if(teamStats1 !== '-'){
+        teamWinLoss[team] = {...teamStats1, wins: teamStats1.wins + 1}
+      } else {
+        teamWinLoss[team] = {loses: 0, wins: 1}
+      }
+    }
+  })
+
+  let teamList = Object.keys(teamWinLoss)
+  let teamPerformance = []
+  teamList.forEach(team => {
+    teamPerformance.push([team, teamWinLoss[team]['wins'], teamWinLoss[team]['loses'], ((teamWinLoss[team]['wins']/(teamWinLoss[team]['wins']+teamWinLoss[team]['loses']))*100).toFixed(2)])
+  })
 
   return (
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                 <TableRow>
-                    <TableCell>Dessert (100g serving)</TableCell>
-                    <TableCell align="right">Calories</TableCell>
-                    <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                    <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                    <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                    <TableCell>Team ID</TableCell>
+                    <TableCell align="right">Wins</TableCell>
+                    <TableCell align="right">Loses</TableCell>
+                    <TableCell align="right">Win (%)</TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {rows.map((row) => (
-                    <TableRow key={row.name}>
-                    <TableCell scope="row">
-                        {row.name}
-                    </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
+                {teamPerformance.map((row) => (
+                    <TableRow key={row[0]}>
+                      <TableCell scope="row">{row[0]}</TableCell>
+                      <TableCell align="right">{row[1]}</TableCell>
+                      <TableCell align="right">{row[2]}</TableCell>
+                      <TableCell align="right">{row[3]}</TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
