@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Ipl-Dashboard/precache-manifest.886f7305f0bd681beffd0b5562add84a.js"
+  "/Ipl-Dashboard/precache-manifest.a29f8490ca5563bc3d7c3e0aa6a87847.js"
 );
 
 self.addEventListener('message', (event) => {
