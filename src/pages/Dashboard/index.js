@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Typography, Paper, makeStyles, Divider } from '@material-ui/core'
+import { Grid, Typography, Paper, makeStyles, Divider, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core'
 import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab';
 
 // import Background from '../../static/background1.jpg';
@@ -14,6 +14,7 @@ import TopTenBowler from '../../components/TopTenBowler'
 import { DataCalculater } from '../../helperFunctions'
 
 import classnames from 'classnames'
+import StatisticalData from '../../components/StatisticalData';
 
 
 const useStyles = makeStyles(theme => ({
@@ -58,9 +59,12 @@ const useStyles = makeStyles(theme => ({
     xsDown: {
       [theme.breakpoints.down('xs')]: {
         '& button': {
-          padding: '2px',
+          display: 'none',
         },
       }
+    },
+    fontWeight: {
+      fontWeight: '600',
     },
     text: {
       [theme.breakpoints.down('xs')]: {
@@ -87,8 +91,54 @@ const useStyles = makeStyles(theme => ({
     },
     elevation: {
       backgroundColor: 'white',
-      borderRadius: '4px',
-      boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
+      borderRadius: '5px',
+      marginBottom: '20px',
+      boxShadow: '0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1)',
+      flexBasis: '49%',
+      [theme.breakpoints.down('sm')]: {
+        flexBasis: '100%',
+      }
+    },
+    fullCard: {
+      backgroundColor: 'white',
+      borderRadius: '5px',
+      marginBottom: '20px',
+      boxShadow: '0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1)',
+    },
+    item: {
+      marginBottom: '20px',
+      flexBasis: '49%',
+      [theme.breakpoints.down('sm')]: {
+        flexBasis: '100%',
+      }
+    },
+    root: {
+      display: 'flex',
+      justifyContent: 'center',
+      padding: '1rem',
+      backgroundColor: '#FAFAFA',
+      [theme.breakpoints.down('sm')]: {
+        padding: '1rem 8px',
+      }
+    },
+    xsSelect: {
+      [theme.breakpoints.down('xs')]: {
+        display: 'block',
+      }
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    removePadding: {
+      [theme.breakpoints.down('xs')]: {
+        paddingBottom: '0px',
+      }
+    },
+    remove: {
+      [theme.breakpoints.down('xs')]: {
+        display: 'none',
+      }
     }
   })
   )
@@ -134,12 +184,12 @@ export default function Dashboard(){
               <Grid container alignItems='center' className={classes.padding}>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
                   <Grid container justify='center'>
-                    <Typography variant='h6'>Total Matches</Typography>
+                    <Typography className={classes.fontWeight} variant='body1'>Total Matches</Typography>
                   </Grid>
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
                   <Grid container justify='center'>
-                    <Typography variant='h6'>{matchCount.length}</Typography>
+                    <Typography className={classes.fontWeight} variant='body1'>{matchCount.length}</Typography>
                   </Grid>
                 </Grid>
               </Grid>
@@ -170,15 +220,15 @@ export default function Dashboard(){
               <Grid container alignItems='center' className={classes.padding}>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
                   <Grid container justify='center'>
-                    <Typography variant='h6'>IPL Season</Typography>
+                    <Typography className={classes.fontWeight} variant='body1'>IPL Season</Typography>
                   </Grid>
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
                   <Grid container justify='center'>
                     {
                       season < 10?
-                      <Typography variant='h6'>{season}</Typography>
-                      :<Typography variant='h6'>1-9</Typography>
+                      <Typography className={classes.fontWeight} variant='body1'>{season}</Typography>
+                      :<Typography className={classes.fontWeight} variant='body1'>1-9</Typography>
                     }
                   </Grid>
                 </Grid>
@@ -207,7 +257,7 @@ export default function Dashboard(){
                   </Grid>
                 </Grid>
             </Grid>
-            <Grid item sm={12} xs={12} className={classes.paddingBottom}>
+            <Grid item sm={12} xs={12} className={classnames(classes.paddingBottom, classes.removePadding)}>
               <Grid container justify='center'>
                 <ToggleButtonGroup
                 className={classes.xsDown}
@@ -226,31 +276,58 @@ export default function Dashboard(){
                     )
                   }
                 </ToggleButtonGroup>
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="season">Season</InputLabel>
+                  <Select
+                    labelId='season'
+                    className={classes.xsSelect}
+                    value={season}
+                    onChange={e => {
+                      setSeason(e.target.value)
+                    }}
+                    >
+                      {
+                      seasonKey.map((row) => 
+                        (
+                          <MenuItem className={classes.padding} key={row[0]} value={row[1]}>
+                            {row[0]}
+                          </MenuItem>
+                        )
+                      )
+                    }
+                  </Select>
+                </FormControl>
               </Grid>
             </Grid>
           </Grid>
 
-          <Divider/>
-          <Grid container justify='center'>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
-              <MatchPlayedPerStadium data={matchCount} />
+          <Divider className={classes.remove}/>
+          <Paper elevation={0} className={classes.root}>
+            <Grid container justify='space-between'>
+              <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classnames(classes.padding, classes.fullCard)}>
+                <MatchPlayedPerStadium data={matchCount} />
+              </Grid>
+              <Grid item xl={6} lg={6} md={6} sm={12} xs={12} className={classnames(classes.item)}>
+                <StatisticalData matchId={matchId} teamMatchRuns={teamwiseBatting}
+                 batsmanData={batsmanScoreByMatch} bowlerData={bowlerWicketsAndDeliveriesByMatch}/>
+              </Grid>
+              <Grid item xl={6} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
+                <TossWinMatchWin data={matchCount} />
+              </Grid>
+              <Grid item xl={6} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
+                <TeamWin data={matchCount} />
+              </Grid>
+              <Grid item xl={6} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
+                <BestTeamPerformance teamMatchRuns={teamwiseBatting} matchId={matchId} />
+              </Grid>
+              <Grid item xl={6} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
+                <TopTenBatsman batsmanData={batsmanScoreByMatch} matchId={matchId}/>
+              </Grid>
+              <Grid item xl={6} lg={6} md={6} sm={12} xs={12}  className={classnames(classes.padding, classes.elevation)}>
+                <TopTenBowler bowlerData={bowlerWicketsAndDeliveriesByMatch} matchId={matchId} />
+              </Grid>
             </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
-              <TossWinMatchWin data={matchCount} />
-            </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
-              <TeamWin data={matchCount} />
-            </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
-              <BestTeamPerformance teamMatchRuns={teamwiseBatting} matchId={matchId} />
-            </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12} className={classnames(classes.padding, classes.elevation)}>
-              <TopTenBatsman batsmanData={batsmanScoreByMatch} matchId={matchId}/>
-            </Grid>
-            <Grid item xl={4} lg={6} md={6} sm={12} xs={12}  className={classnames(classes.padding, classes.elevation)}>
-              <TopTenBowler bowlerData={bowlerWicketsAndDeliveriesByMatch} matchId={matchId} />
-            </Grid>
-          </Grid>
+          </Paper>
         </Paper>
       </>
     )

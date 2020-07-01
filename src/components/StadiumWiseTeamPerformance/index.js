@@ -45,7 +45,7 @@ export default function StadiumWiseTeamPerformance(props){
             }
         }
     }
-    // console.log('team wins', teamWinLoss)
+    
     let teamList = Object.keys(teamWinLoss)
     let winArray = []
     let lossArray = []
@@ -53,14 +53,13 @@ export default function StadiumWiseTeamPerformance(props){
         winArray.push(teamWinLoss[row].wins)
         lossArray.push(teamWinLoss[row].losses)
     })
-    // console.log('team wins', winArray, lossArray)
+    
 
     let series = [{ name: 'Wins', data: winArray}, 
                  {name: 'Losses', data: lossArray}]
     let options = {
         chart: {
           type: 'bar',
-        //   height: 350,
           stacked: true,
         },
         plotOptions: {

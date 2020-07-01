@@ -11,8 +11,8 @@ export default function BowlerPerformance(props){
     let wickets = []
     matchId.forEach( match => {
         let matchData = _.get(props.data, match, '-')
-        economies.push(matchData.runs/matchData.balls)
-        overs.push(matchData.balls/6)
+        economies.push((matchData.runs/matchData.balls).toFixed(2))
+        overs.push((matchData.balls/6).toFixed(2))
         wickets.push(matchData.wickets)
     })
     
@@ -34,7 +34,7 @@ export default function BowlerPerformance(props){
         },
         plotOptions: {
           bar: {
-            horizontal: true,
+            vertical: true,
             columnWidth: '55%',
             endingShape: 'rounded'
           },
@@ -48,14 +48,13 @@ export default function BowlerPerformance(props){
           colors: ['transparent']
         },
         xaxis: {
-          categories: matchId,
           title: {
-            text: 'Count'
+            text: 'Match'
           }
         },
         yaxis: {
           title: {
-            text: 'Match'
+            text: 'Count'
           }
         },
         fill: {

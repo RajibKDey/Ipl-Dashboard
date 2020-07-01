@@ -4,7 +4,6 @@ import ReactApexChart from 'react-apexcharts'
 import _ from 'lodash'
 
 
-
 export default function TossWinMatchWin(props){
 
     let tossData = {}
@@ -82,16 +81,22 @@ export default function TossWinMatchWin(props){
           opacity: 1
         },
         legend: {
+          markers: {
+            height: '6px',
+            width: '6px',
+          },
+          itemMargin : {
+            horizontal: 20,
+          },
           position: 'top',
-          horizontalAlign: 'left',
-          offsetX: 40
+          horizontalAlign: 'center',
         },
         responsive: [{
           breakpoint: 1280,
           options: {
             chart: {
               width: 420,
-              heigth: 350,
+              heigth: 400,
             }
           },
         },{
@@ -107,7 +112,7 @@ export default function TossWinMatchWin(props){
           options: {
             chart: {
               width: 350,
-              heigth:350,
+              heigth: 350,
             }
           },
         }]
@@ -116,7 +121,7 @@ export default function TossWinMatchWin(props){
     return (
         <>
           <Grid container justify='center'>
-            <ReactApexChart options={options} series={series} type="bar" height={350} width={600} />
+            <ReactApexChart options={options} series={series} type="bar" width='600' heigth= '350'/>
           </Grid>
         </>
     )

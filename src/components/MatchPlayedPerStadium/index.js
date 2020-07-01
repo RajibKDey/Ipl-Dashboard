@@ -4,22 +4,14 @@ import Chart from 'react-apexcharts'
 
 import StadiumWiseTeamPerformance from '../StadiumWiseTeamPerformance'
 import CustomPopup from '../CustomPopup'
+import TeamWinLossData from '../TeamWinLossData'
 
 const useStyles = makeStyles( theme => ({
-    chart: {
-        '& div': {
-            '& svg': {
-                '& foreignObject': {
-                    '& div': {
-                        width: '170px',
-                        [theme.breakpoints.down('xs')]: {
-                            display: 'none',
-                        },
-                    },
-                },
-            },
-        },
-    },
+    smDown: {
+        [theme.breakpoints.down('md')]: {
+            paddingTop: theme.spacing(3),
+          }
+    }
 }))
 
 const groupBy = key => array =>
@@ -52,12 +44,14 @@ export default function MatchPlayedPerStadium(props){
             title: {
                 text: 'Stadium-Wise Match Count'
             },
+            legend: {
+                show: false,
+            },
             plotOptions: {
                 pie: {
                     donut: {
                         size: '45%',
                         labels: {
-                            show: true
                         }
                     }
                 }
@@ -65,14 +59,11 @@ export default function MatchPlayedPerStadium(props){
             chart:{
                 events:{
                     dataPointSelection: function(event, chartContext, config) {
-                        
                         if(config.dataPointIndex !== undefined){
                             setStadium(stadiumWiseMatches[stadiumNames[config.dataPointIndex]])
                             setStadiumName(stadiumNames[config.dataPointIndex])
                             setOpenPopup(true)
                         }
-                        // console.log(config.dataPointIndex)
-                        // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
                     }
                 }
             },
@@ -103,25 +94,34 @@ export default function MatchPlayedPerStadium(props){
 
     return (
         <>
-            <Grid container justify='center'>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                    <Grid container justify='center'>
-                        <Chart className={classes.chart} options={options} series={series} type='donut' width='600' height='300'/>
+        <Grid container justify='center' alignItems='center'>
+            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+                <Grid container justify='center'>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                        <Grid container justify='center'>
+                            <Chart className={classes.chart} options={options} series={series} type='donut' width='600' height='300'/>
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                    <Grid container justify='center'>
-                        <Typography variant='caption'>Click Chart Segments To View More</Typography>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                        <Grid container justify='center'>
+                            <Typography variant='caption'>Click Chart Segments To View More</Typography>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
+            <Grid item xl={5} lg={5} md={6} sm={12} xs={12} className={classes.smDown}>
+                <Grid container justify='center'>
+                    <TeamWinLossData data={props.data} />
+                </Grid>
+            </Grid>
+        </Grid>
+            
 
             { stadiumName && stadium?
                 <CustomPopup titleText={stadiumName} maxWidth={'sm'} open={openPopup} fullWidth={true} handleClose={() => {setOpenPopup(false); setStadium(''); setStadiumName('')}}>
                     <StadiumWiseTeamPerformance data={stadium}/>
                 </CustomPopup>
-                :null
-            }
+                :null            }
         </>
     )
 }
