@@ -1,16 +1,18 @@
+The project is hosted at https://rajibkdey.github.io/Ipl-Dashboard/
+
 This project is on IPL data spanning over the years 2008 - 2016.
 Dataset used is Ball_by_Ball.csv and Match.csv from https://www.kaggle.com/harsha547/indian-premier-league-csv-dataset
 
 Framework used for the project React
 
 Major libraries used include:
-1. @material-ui/core (npm i @material-ui/core)
-2. @material-ui/icons (npm i @material-ui/icons)
-3. @material-ui/lab (npm i @material-ui/lab)
-4. apexcharts (npm i apexcharts)
-5. classnames (npm i classnames)
-6. lodash (npm i lodash)
-7. react-apexcharts (npm i react-apexcharts)
+1. @material-ui/core
+2. @material-ui/icons
+3. @material-ui/lab
+4. apexcharts
+5. classnames
+6. lodash
+7. react-apexcharts
 
 @material-ui/core, @material-ui/icons & @material-ui/lab:
 I have used this to get predefined components that can be used directly into projects giving it a modern and sleek look. It also contains the makeStyles hook that material-ui provides for us to enable modification of any ui component to our liking based on the scenario or breakpoints encountered if building responsive application.
