@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/Ipl-Dashboard/static/css/main.a1b8f258.chunk.css",
-    "main.js": "/Ipl-Dashboard/static/js/main.4817d1a5.chunk.js",
-    "main.js.map": "/Ipl-Dashboard/static/js/main.4817d1a5.chunk.js.map",
+    "main.js": "/Ipl-Dashboard/static/js/main.7c268f92.chunk.js",
+    "main.js.map": "/Ipl-Dashboard/static/js/main.7c268f92.chunk.js.map",
     "runtime-main.js": "/Ipl-Dashboard/static/js/runtime-main.facee51a.js",
     "runtime-main.js.map": "/Ipl-Dashboard/static/js/runtime-main.facee51a.js.map",
-    "static/js/2.e6546769.chunk.js": "/Ipl-Dashboard/static/js/2.e6546769.chunk.js",
-    "static/js/2.e6546769.chunk.js.map": "/Ipl-Dashboard/static/js/2.e6546769.chunk.js.map",
+    "static/js/2.b30258ce.chunk.js": "/Ipl-Dashboard/static/js/2.b30258ce.chunk.js",
+    "static/js/2.b30258ce.chunk.js.map": "/Ipl-Dashboard/static/js/2.b30258ce.chunk.js.map",
     "index.html": "/Ipl-Dashboard/index.html",
-    "precache-manifest.a29f8490ca5563bc3d7c3e0aa6a87847.js": "/Ipl-Dashboard/precache-manifest.a29f8490ca5563bc3d7c3e0aa6a87847.js",
+    "precache-manifest.b9af2a3dbaa6615e3a00449986fed7f4.js": "/Ipl-Dashboard/precache-manifest.b9af2a3dbaa6615e3a00449986fed7f4.js",
     "service-worker.js": "/Ipl-Dashboard/service-worker.js",
     "static/css/main.a1b8f258.chunk.css.map": "/Ipl-Dashboard/static/css/main.a1b8f258.chunk.css.map",
-    "static/js/2.e6546769.chunk.js.LICENSE.txt": "/Ipl-Dashboard/static/js/2.e6546769.chunk.js.LICENSE.txt"
+    "static/js/2.b30258ce.chunk.js.LICENSE.txt": "/Ipl-Dashboard/static/js/2.b30258ce.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.facee51a.js",
-    "static/js/2.e6546769.chunk.js",
+    "static/js/2.b30258ce.chunk.js",
     "static/css/main.a1b8f258.chunk.css",
-    "static/js/main.4817d1a5.chunk.js"
+    "static/js/main.7c268f92.chunk.js"
   ]
 }
